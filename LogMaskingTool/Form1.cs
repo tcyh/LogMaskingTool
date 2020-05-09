@@ -32,10 +32,10 @@ namespace LogMaskingTool
 
             while (streamreader.Peek() >= 0)
             {
-                datatable.NewRow();
+                //datatable.NewRow();
                 String[] termpair = streamreader.ReadLine().Split(delimiter);
-                datatable.Rows.Add(termpair);
-                Console.WriteLine(termpair[0] + ":" + termpair[1]);
+                //datatable.Rows.Add(termpair);
+                Console.WriteLine(termpair[0] + ":" + termpair[1] + ":" + termpair[2]);
 
                 //DataRow datarow = datatable.NewRow();
                 //datatable.Rows.Add(streamreader.ReadLine());
