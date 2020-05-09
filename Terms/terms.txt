@@ -1,0 +1,3 @@
+word	"original"	"replaced"	
+word	"original1"	"replaced1"
+regex	"\d+\.\d+\.\d+\.\d+"	"<IP ADDR>"
