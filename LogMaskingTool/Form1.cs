@@ -9,45 +9,87 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using NLog;
 
 namespace LogMaskingTool
 {
     public partial class Form1 : Form
     {
         private List<Term> termsList = new List<Term> ();
+        private Logger log = LogManager.GetCurrentClassLogger();
+        private DataTable dataTable = new DataTable();
+      
 
         public Form1()
         {
+            InitializeComponent();
             try
             {
-                LoadTerms();
+                dataTable = LoadTermsFromFile();
+                if(dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    //this.dgvterms.columns.addrange(new system.windows.forms.datagridviewcolumn[] {
+                    //this.termtype,
+                    //this.orignal,
+                    //this.replacement});
+                    this.dgvTerms.DataSource = dataTable;
+
+
+                    //this.TermType.DataSource = 
+                    //this.TermType.DisplayMember = "TermType";
+                    //this.TermType.ValueMember = "TermType";
+
+                    
+
+                }
+                
             }
-            catch(Exception ex)
+            catch (FileNotFoundException fe)
             {
-                MessageBox.Show("Unable to load terms file");
+                log.Debug(fe);
+                MessageBox.Show("Unable to load terms file", "FileNotFoundException", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                log.Debug(ex);
+                MessageBox.Show("Unknown Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            InitializeComponent();
-            
+            finally
+            {
+                InitializeComponent();
+            }
+
+
+
         }
 
-        private void LoadTerms()
+        private DataTable LoadTermsFromFile()
         {
-            DataTable datatable = new DataTable();
+            DataTable dataTable = new DataTable();
             StreamReader streamreader = new StreamReader(ConfigurationManager.AppSettings["DefaultTermsFileDir"].ToString());
             char[] delimiter = new char[] { '\t' };
-            string[] columnheaders = streamreader.ReadLine().Split(delimiter);
-
+            dataTable.Columns.Add("TermType");
+            dataTable.Columns.Add("Original");
+            dataTable.Columns.Add("Replacement");
             while (streamreader.Peek() >= 0)
             {
-                //datatable.NewRow();
-                String[] termpair = streamreader.ReadLine().Split(delimiter);
-                //datatable.Rows.Add(termpair);
-                Console.WriteLine(termpair[0] + ":" + termpair[1] + ":" + termpair[2]);
-
-                //DataRow datarow = datatable.NewRow();
-                //datatable.Rows.Add(streamreader.ReadLine());
+                string line = streamreader.ReadLine();
+                if (!String.IsNullOrWhiteSpace(line))
+                {
+                    string[] values = line.Split(delimiter);
+                    if (values.Length >= 3)
+                    {   
+                        DataRow dataRow = dataTable.NewRow();
+                        dataRow["TermType"] = values[0];
+                        dataRow["Original"] = values[1].Trim('\"');
+                        dataRow["Replacement"] = values[2].Trim('\"');
+                        dataTable.Rows.Add(dataRow);
+                    }
+                }
             }
+
+            return dataTable;
         }
 
         private void btnBrowseLogDir_Click(object sender, EventArgs e)
@@ -63,11 +105,11 @@ namespace LogMaskingTool
             }
         }
 
-        private void logger(string header, string body)
-        {
-            lbLogs.Items.Add(DateTime.Now.ToString() + "___" + header + "___" + body);
-            lbLogs.SelectedIndex = lbLogs.Items.Count - 1;
-        }
+        //private void logger(string header, string body)
+        //{
+        //    lbLogs.Items.Add(DateTime.Now.ToString() + "___" + header + "___" + body);
+        //    lbLogs.SelectedIndex = lbLogs.Items.Count - 1;
+        //}
 
     }
 }

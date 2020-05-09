@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace LogMaskingTool
 {
-    class Term
+    internal class Term
     {
-        public Term(string originalTerm, string replacedTerm)
+        
+        public Term(string originalTerm, string replacedTerm, TermType termType)
         {
+            
             OriginalTerm = originalTerm;
             ReplacedTerm = replacedTerm;
+            
         }
 
         public string OriginalTerm { get; set; }
         public string ReplacedTerm { get; set; }
+        public enum TermType { word , regex };
+        
 
     }
 
