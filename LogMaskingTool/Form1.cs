@@ -26,20 +26,20 @@ namespace LogMaskingTool
         private void LoadTerms()
         {
             DataTable datatable = new DataTable();
-            StreamReader streamreader = new StreamReader(ConfigurationManager.AppSettings["DefaultTermsFileDir"].ToString());
+            //StreamReader streamreader = new StreamReader(ConfigurationManager.AppSettings["DefaultTermsFileDir"].ToString());
             char[] delimiter = new char[] { '\t' };
             //string[] columnheaders = streamreader.ReadLine().Split(delimiter);
 
-            while (streamreader.Peek() >= 0)
-            {
-                //datatable.NewRow();
-                String[] termpair = streamreader.ReadLine().Split(delimiter);
-                //datatable.Rows.Add(termpair);
-                Console.WriteLine(termpair[0] + ":" + termpair[1] + ":" + termpair[2]);
+            //while (streamreader.Peek() >= 0)
+            //{
+            //    //datatable.NewRow();
+            //    String[] termpair = streamreader.ReadLine().Split(delimiter);
+            //    //datatable.Rows.Add(termpair);
+            //    Console.WriteLine(termpair[0] + ":" + termpair[1] + ":" + termpair[2]);
 
-                //DataRow datarow = datatable.NewRow();
-                //datatable.Rows.Add(streamreader.ReadLine());
-            }
+            //    //DataRow datarow = datatable.NewRow();
+            //    //datatable.Rows.Add(streamreader.ReadLine());
+            //}
            
 
 

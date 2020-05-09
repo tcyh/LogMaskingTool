@@ -41,6 +41,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Orignal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Replaced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,8 +67,14 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Type,
+            this.Orignal,
+            this.Replaced});
             this.dataGridView1.Location = new System.Drawing.Point(12, 27);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
@@ -178,6 +187,21 @@
             this.button2.Text = "Browse";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // Type
+            // 
+            this.Type.HeaderText = "Type";
+            this.Type.Name = "Type";
+            // 
+            // Orignal
+            // 
+            this.Orignal.HeaderText = "Orignal";
+            this.Orignal.Name = "Orignal";
+            // 
+            // Replaced
+            // 
+            this.Replaced.HeaderText = "Replaced";
+            this.Replaced.Name = "Replaced";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -212,6 +236,9 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Orignal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Replaced;
     }
 }
 
