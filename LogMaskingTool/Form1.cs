@@ -20,7 +20,7 @@ namespace LogMaskingTool
         {
             try
             {
-                LoadTerms();
+                LoadTerms();//test
             }
             catch(Exception ex)
             {
